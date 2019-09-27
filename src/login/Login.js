@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
-
+import firebase from '../services/conexaodb';
 
 function Cabecalho (){
   return (
 
-    <div>teste
+    <div>
+      teste
     </div>
 
   )
