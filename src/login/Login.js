@@ -1,31 +1,33 @@
 import React, {Component} from 'react';
 import './login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+//import firebase from 'firebase';
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import firebase from '../services/conexaodb';
+import FacebookLogin from 'react-facebook-login';
 
-function Cabecalho (){
-  return (
-
-    <div>
-      teste
-    </div>
-
-  )
-}
+//function Cabecalho (){
+  //return (
+    //<div>
+      //teste
+    //</div>
+  //)
+//}
 
 class Login extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
+      estaLogado: false,
+      nome: '',
       email: '',
-      senha: ''
+      senha: '',
+      imagem: ''
     };
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        alert("Mudou");
+        //alert("Mudou");
         firebase.database().ref('usuario').child(user.uid).set({
           email: this.state.email,
           senha: this.state.senha
@@ -38,9 +40,9 @@ class Login extends Component {
         })
       }
     });
-
     this.logar = this.logar.bind(this);
-  }
+  }  
+
 
     logar (e) {
       firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.senha)
@@ -61,25 +63,64 @@ class Login extends Component {
               break;
           }
         })
-    
         e.preventDefault();
+    }
+
+    responseFacebook = (resposta) => {
+      this.setState({
+        nome: resposta.nome,
+        email: resposta.email,
+        imagem: resposta.picture.data.url
+      });
     }
 
  //<Cabecalho></Cabecalho>
   render() {
     return (
-      <div>
-        <h1>Logar</h1>
-        <form onSubmit={this.logar}>
-          {/*<Link to="/cadastro"><button >Cadastrar</button> </Link> */}
-        <div class="form-group row">
-          <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"  placeholder="Email" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})}/></div>
-          <br></br>
-          <div class="col-sm-6 mb-3 mb-sm-0"><input type="password" class="form-control form-control-user" id="examplePasswordInput" placeholder="Senha" value={this.state.senha} onChange={(e) => this.setState({senha: e.target.value})}/></div>
-        </div><button class="btn btn-primary btn-block text-white btn-user" type="submit">Registrar</button> 
-        </form>
-      </div>
+      <div class="container">
+      <div class="card shadow-lg o-hidden border-0 my-5">
+          <div class="card-body p-0">
+              <div class="row">
+                  <div class="col-lg-7">
+                  <div class="p-7">
+                          <div class="text-center">
+                              <h4 class="text-dark mb-4">Login</h4>
+                          </div>
+                          <form onSubmit={this.cadastrar}>
+                              
+                              <div class="form-group row">
+                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})}/>
+                              </div> 
+                                                          
+                              <div class="form-group row">
+                                <input type="password" class="form-control form-control-user" id="examplePasswordInput" placeholder="Senha" value={this.state.senha} onChange={(e) => this.setState({senha: e.target.value})}/>   
+                              </div>
 
+                              <br></br>
+                              
+                              <button class="btn btn-primary btn-block text-white btn-user" type="submit">Logar</button>
+                              <hr />
+                              
+                              <a class="btn btn-primary btn-block text-white btn-facebook btn-user" role="button">
+                                <i class="fab fa-facebook-f"></i> 
+                                <FacebookLogin
+                                  appId="422454525085213"
+                                  autoLoad={true}
+                                  fields="name,email,picture"
+                                  onClick={this.componentClicked}
+                                  textButton="Login com Facebook"
+                                  callback={this.responseFacebook} 
+                                />
+                              </a>
+                              <hr/>
+                        </form>
+                                                  
+                </div>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
     );
   }
 }
