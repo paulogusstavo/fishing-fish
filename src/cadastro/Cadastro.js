@@ -3,17 +3,12 @@ import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import './cadastro.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from 'firebase';
+import FacebookLogin from 'react-facebook-login';
 
 // const Teste = () => {
-
-//   return(
-
-    
+//   return(  
 //   )
-
 // }
-
-
 
 class Cadastro extends Component {
   
@@ -25,12 +20,14 @@ class Cadastro extends Component {
       sobrenome: '',
       email: '',
       senha: '',
-      confirmarSenha: ''
+      confirmarSenha: '',
+      email: "",
+      imagem: ""
     };
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        alert("Mudou");
+        //alert("Mudou");
         firebase.database().ref('usuario').child(user.uid).set({
           nome: this.state.nome,
           sobrenome: this.state.sobrenome
@@ -73,6 +70,14 @@ class Cadastro extends Component {
       e.preventDefault();
   }
 
+  responseFacebook = (resposta) => {
+    this.setState({
+      nome: resposta.nome,
+      email: resposta.email,
+      //imagem: resposta.picture.data.url
+    });
+  }
+
   render() {
     return (
       // <Teste></Teste>
@@ -100,17 +105,23 @@ class Cadastro extends Component {
                                   <div class="col-sm-6"><input type="password" class="form-control form-control-user" id="exampleRepeatPasswordInput" placeholder="Confirmar senha" value={this.state.confirmarSenha} onChange={(e) => this.setState({confirmarSenha: e.target.value})}/></div>
                               </div><button class="btn btn-primary btn-block text-white btn-user" type="submit">Registrar</button>
                               <hr />
-                              <a class="btn btn-primary btn-block text-white btn-google btn-user" role="button">
-                                <i class="fab fa-google"></i> 
-                                Register with Google
-                                </a>
-                              <a class="btn btn-primary btn-block text-white btn-facebook btn-user" role="button">
-                                <i class="fab fa-facebook-f"></i> 
-                                  Register with Facebook</a>
+                              
+                                <i class="fab fa-facebook-f" class="center"></i> 
+                                <FacebookLogin
+                                appId="422454525085213"
+                                autoLoad={true}
+                                fields="name,email,picture"
+                                onClick={this.componentClicked}
+                                textButton="Login with Facebook"
+                                callback={this.responseFacebook} 
+                              />
+                              
+                              
                               <hr/>
                           </form>
                           <div class="text-center"><a class="small" href="forgot-password.html">Esqueceu a senha?</a></div>
-                          <div class="text-center"><a class="small" href="login.html">Já possui uma conta? Entre!</a></div>
+                          <div class="text-center"><a class="small" href="/login">Já possui uma conta? Entre!</a></div>
+                          
                       </div>
                   </div>
               </div>

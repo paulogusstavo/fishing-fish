@@ -70,7 +70,7 @@ class Login extends Component {
       this.setState({
         nome: resposta.nome,
         email: resposta.email,
-        imagem: resposta.picture.data.url
+        //imagem: resposta.picture.data.url
       });
     }
 
@@ -79,48 +79,26 @@ class Login extends Component {
     return (
       <div class="container">
       <div class="card shadow-lg o-hidden border-0 my-5">
-          <div class="card-body p-0">
-              <div class="row">
-                  <div class="col-lg-7">
-                  <div class="p-7">
-                          <div class="text-center">
-                              <h4 class="text-dark mb-4">Login</h4>
-                          </div>
-                          <form onSubmit={this.cadastrar}>
-                              
-                              <div class="form-group row">
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})}/>
-                              </div> 
-                                                          
-                              <div class="form-group row">
-                                <input type="password" class="form-control form-control-user" id="examplePasswordInput" placeholder="Senha" value={this.state.senha} onChange={(e) => this.setState({senha: e.target.value})}/>   
-                              </div>
-
-                              <br></br>
-                              
-                              <button class="btn btn-primary btn-block text-white btn-user" type="submit">Logar</button>
-                              <hr />
-                              
-                              <a class="btn btn-primary btn-block text-white btn-facebook btn-user" role="button">
-                                <i class="fab fa-facebook-f"></i> 
-                                <FacebookLogin
-                                  appId="422454525085213"
-                                  autoLoad={true}
-                                  fields="name,email,picture"
-                                  onClick={this.componentClicked}
-                                  textButton="Login com Facebook"
-                                  callback={this.responseFacebook} 
-                                />
-                              </a>
-                              <hr/>
-                        </form>
-                                                  
-                </div>
-                </div>
+        <div class="card-body p-0">
+          <div class="p-7">     
+            <div class="text-center">
+              <h4 class="text-dark mb-4">Login</h4>
+            </div>
+            <form onSubmit={this.cadastrar}>
+              <div class="form-group row">
+                <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})}/>
               </div>
-          </div>
+              <div class="form-group row">
+                <input type="password" class="form-control form-control-user" id="examplePasswordInput" placeholder="Senha" value={this.state.senha} onChange={(e) => this.setState({senha: e.target.value})}/>   
+              </div> 
+              <br></br>
+              <button class="btn btn-primary btn-block text-white btn-user" type="submit">Logar</button>
+              <hr/>
+            </form>
+          </div> 
+        </div>
       </div>
-  </div>
+    </div>
     );
   }
 }

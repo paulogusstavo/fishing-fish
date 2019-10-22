@@ -2,7 +2,6 @@ import firebase from 'firebase';
 import 'firebase/database';
 import 'firebase/auth';
 
-
 let firebaseConfig = {
     apiKey: "AIzaSyAX3SXWBek6h82dZj3yi3btrDVUy3sYD9I",
     authDomain: "fishing-8bcc8.firebaseapp.com",
