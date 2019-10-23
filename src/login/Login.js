@@ -66,14 +66,7 @@ class Login extends Component {
         e.preventDefault();
     }
 
-    responseFacebook = (resposta) => {
-      this.setState({
-        nome: resposta.nome,
-        email: resposta.email,
-        //imagem: resposta.picture.data.url
-      });
-    }
-
+    
  //<Cabecalho></Cabecalho>
   render() {
     return (

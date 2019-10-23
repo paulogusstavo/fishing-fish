@@ -71,10 +71,11 @@ class Cadastro extends Component {
   }
 
   responseFacebook = (resposta) => {
+    alert("-> ", resposta.picture.data.url);
     this.setState({
       nome: resposta.nome,
       email: resposta.email,
-      //imagem: resposta.picture.data.url
+      //imagem: resposta.picture.data.url --Verificar
     });
   }
 
