@@ -6,7 +6,7 @@ import Login from '../login/Login';
 
 function Home() {
   return (
-    <div>
+    <div class="text-center">
 
     <h1>BEM VINDO AO FISHING FISH</h1>
     <Link to="/cadastro">Cadastrar</Link><br></br>
