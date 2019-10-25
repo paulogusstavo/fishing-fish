@@ -8,7 +8,7 @@ function Home() {
   return (
     <div>
       <div id="wrapper">
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" styles="background-image: url('madeira.png');opacity: 0.76;background-size: contain;">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" styles="background-image: url('../images/madeira.png');opacity: 0.76;background-size: contain;">
         <div class="container-fluid d-flex flex-column p-0">
             <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                 <div class="sidebar-brand-icon rotate-n-15 fas fa-fish fa-lg"></div>
@@ -16,8 +16,7 @@ function Home() {
             </a>
             <hr class="sidebar-divider my-0" />
             <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item" role="presentation"><
-                  a class="nav-link active" href="index.html">
+                <li class="nav-item" role="presentation"><a class="nav-link active" href="/Home">
                   <i class="fas fa-tachometer-alt fas fa-home"></i>
                   <span>Página Inicial</span>
                   </a>
@@ -96,7 +95,7 @@ function Home() {
                                 <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
                                     <h6 class="dropdown-header">alerts center</h6>
                                     <a class="d-flex align-items-center dropdown-item" href="#">
-                                        <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="avatars/avatar4.jpeg" />
+                                        <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../images/avatar4.jpeg" />
                                             <div class="bg-success status-indicator"></div>
                                         </div>
                                         <div class="font-weight-bold">
@@ -105,7 +104,7 @@ function Home() {
                                         </div>
                                     </a>
                                     <a class="d-flex align-items-center dropdown-item" href="#">
-                                        <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="avatars/avatar2.jpeg" />
+                                        <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../images/avatar2.jpeg" />
                                             <div class="status-indicator"></div>
                                         </div>
                                         <div class="font-weight-bold">
@@ -114,7 +113,7 @@ function Home() {
                                         </div>
                                     </a>
                                     <a class="d-flex align-items-center dropdown-item" href="#">
-                                        <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="avatars/avatar3.jpeg" />
+                                        <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../images/avatar3.jpeg" />
                                             <div class="bg-warning status-indicator"></div>
                                         </div>
                                         <div class="font-weight-bold">
@@ -123,7 +122,7 @@ function Home() {
                                         </div>
                                     </a>
                                     <a class="d-flex align-items-center dropdown-item" href="#">
-                                        <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="avatars/avatar5.jpeg" />
+                                        <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../images/avatar5.jpeg" />
                                             <div class="bg-success status-indicator"></div>
                                         </div>
                                         <div class="font-weight-bold">
@@ -136,7 +135,7 @@ function Home() {
                         </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow" role="presentation">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Anônimo</span><img class="border rounded-circle img-profile" src="avatar feminino.jpg" /></a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Anônimo</span><img class="border rounded-circle img-profile" src="../images/avatarfeminino.jpg" /></a>
                                 <div
                                     class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings</a>
                                     <a
@@ -220,8 +219,6 @@ function Home() {
         </footer>
     </footer>
 </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
-
-
 
     
     </div>
