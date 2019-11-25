@@ -1,18 +1,9 @@
 import React, {Component} from 'react';
 import './login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import firebase from 'firebase';
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import firebase from '../services/conexaodb';
 import FacebookLogin from 'react-facebook-login';
-
-//function Cabecalho (){
-  //return (
-    //<div>
-      //teste
-    //</div>
-  //)
-//}
 
 class Login extends Component {
   constructor(props) {

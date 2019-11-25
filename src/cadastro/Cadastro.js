@@ -3,12 +3,8 @@ import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import './cadastro.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from 'firebase';
-import FacebookLogin from 'react-facebook-login';
-
-// const Teste = () => {
-//   return(  
-//   )
-// }
+import Facebook from '../services/Facebook';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 class Cadastro extends Component {
   
@@ -16,6 +12,7 @@ class Cadastro extends Component {
     super(props);
 
     this.state = {
+      isLogged: false,
       nome: '',
       sobrenome: '',
       email: '',
@@ -25,23 +22,44 @@ class Cadastro extends Component {
       imagem: ""
     };
 
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        //alert("Mudou");
-        firebase.database().ref('usuario').child(user.uid).set({
-          nome: this.state.nome,
-          sobrenome: this.state.sobrenome
-        })
-        .then(() => {
-          this.setState({
-            nome: "",
-            sobrenome: "",
-            senha: "",
-            confirmarSenha: ""
-          })
-        })
+    this.uiConfig = {
+      signInFlow: "popup",
+      signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      ],
+      callbacks: {
+        signInSucess: () => false,
+        signInSucessWithAuthResult: async function(authResult, redirectUrl) {
+          console.log("PPP-> ",authResult, redirectUrl);
+          let token = await firebase.auth().currentUser.getIdToken(true);
+          console.log(token);
+
+          return true;
+        }
       }
-    });
+    }
+
+    this.componentDidMount = () => {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          //alert("Mudou");
+          firebase.database().ref('usuario').child(user.uid).set({
+            nome: this.state.nome,
+            sobrenome: this.state.sobrenome
+          })
+          .then(() => {
+            this.setState({
+              nome: "",
+              sobrenome: "",
+              senha: "",
+              confirmarSenha: ""
+            })
+          })
+        }
+      });  
+    }
 
     this.cadastrar = this.cadastrar.bind(this);
 
@@ -104,20 +122,18 @@ class Cadastro extends Component {
                               <div class="form-group row">
                                   <div class="col-sm-6 mb-3 mb-sm-0"><input type="password" class="form-control form-control-user" id="examplePasswordInput" placeholder="Senha" value={this.state.senha} onChange={(e) => this.setState({senha: e.target.value})}/></div>
                                   <div class="col-sm-6"><input type="password" class="form-control form-control-user" id="exampleRepeatPasswordInput" placeholder="Confirmar senha" value={this.state.confirmarSenha} onChange={(e) => this.setState({confirmarSenha: e.target.value})}/></div>
-                              </div><button class="btn btn-primary btn-block text-white btn-user" type="submit">Registrar</button>
-                              <hr />
-                              
-                                <i class="fab fa-facebook-f" class="center"></i> 
-                                <FacebookLogin
-                                appId="422454525085213"
-                                autoLoad={true}
-                                fields="name,email,picture"
-                                onClick={this.componentClicked}
-                                textButton="Login with Facebook"
-                                callback={this.responseFacebook} 
-                              />
-                              
-                              
+                              </div>
+                              <button class="btn btn-primary btn-block text-white btn-user" type="submit">Registrar</button>    
+                              <hr></hr>
+                              <div class="form-group row">
+                                    <StyledFirebaseAuth
+                                    uiConfig={this.uiConfig}
+                                    firebaseAuth={firebase.auth()}
+                                    />
+                                  <div class="col-sm-6">
+                                  
+                                  </div>
+                              </div>
                               <hr/>
                           </form>
                           <div class="text-center"><a class="small" href="forgot-password.html">Esqueceu a senha?</a></div>
