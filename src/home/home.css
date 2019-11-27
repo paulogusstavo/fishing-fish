@@ -1,8 +1,8 @@
 body {
     height: 100%;
-    background-image: linear-gradient(to bottom, #2bcf90, #006b17 130%);
+    background-color: gray;
 }
 
-input {
+/* input {
     border-radius: 300px;
-}
+} */

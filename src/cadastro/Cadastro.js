@@ -23,7 +23,7 @@ class Cadastro extends Component {
     };
 
     this.uiConfig = {
-      signInFlow: "popup",
+      signInFlow: "pop-up",
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -78,6 +78,8 @@ class Cadastro extends Component {
           case 'auth/weak-password':
             alert("Senha fraca!");
             break;
+          case 'auth/email-already-in-use':
+            alert("Este email já existe.");
           break;
           default:
             alert("ERRO: " + error.code)

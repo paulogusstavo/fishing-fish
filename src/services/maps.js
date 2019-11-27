@@ -1,13 +1,39 @@
 import React, {Component} from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import firebase from 'firebase';
 
 export class GoogleMaps extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      stores: [{latitude: -25.4284, longitude: -49.2733}]
+      stores: []
     }
+  }
+
+  componentDidMount() {
+    firebase.database().ref("zWdbhx2MfrcBzRj56BLAej5L43l2").child("fishes")
+    .on("value", (snapshot)=>{
+      let points = []
+      snapshot.forEach( (fish) => {
+        points.push({
+          latitude: fish.val().latitude,
+          longitude: fish.val().longitude,
+        });
+      });
+      this.setState({
+        stores: points
+      })
+      console.log("Paulo->", this.state.stores)
+    });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("1");
+    console.log(nextProps, nextState);
+    console.log(this.props, this.state);
+
+    return true;
   }
 
   marcadoresLocais = () => {
@@ -35,8 +61,8 @@ export class GoogleMaps extends Component {
 }
 
 const mapStyles = {
-  width: '100%',
-  height: '100%',
+  width: '95%',
+  height: '95%',
 };
 
 export default GoogleApiWrapper({

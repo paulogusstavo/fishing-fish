@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
-import Facebook from '../services/Facebook';
-import DadosUsuario from '../services/DadosUsuario';
 
 class FishRegister extends Component {
 
@@ -19,16 +17,23 @@ class FishRegister extends Component {
       this.insertFish = this.insertFish.bind(this);
     }
 
-    insertFish() { //TODO: Validade form.
-      let usuarios = firebase.database().ref("usuarios"); 
-      let chave = 123 //usuarios.push().key;
-      firebase.database().ref(chave).child("fishes").push({
-        especie:this.state.especie, 
-        peso:this.state.peso, 
-        comprimento:this.state.comprimento,
-        latitude:this.state.latitude,
-        longitude: this.state.longitude
-      });  
+    async insertFish() { //TODO: Validade form.
+      await firebase.auth().currentUser.getIdTokenResult()
+      .then( (result) => {
+        let userUID = result.claims.user_id;
+      
+        firebase.database().ref(userUID).child("fishes")
+        .push({
+          especie:this.state.especie, 
+          peso:this.state.peso, 
+          comprimento:this.state.comprimento,
+          latitude:this.state.latitude,
+          longitude: this.state.longitude
+        });  
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     }
   
     render() {
