@@ -28,11 +28,17 @@ function Home() {
                   </i><span>Feed</span></a>
                 
                 <a class="nav-link active" href="/login">
-                  <i class="fas fa-tachometer-alt fas fa-user">
-                  </i><span>Login</span></a><a class="nav-link active" href="/cadastro">
-                  <i class="fa fa-gears"></i>
+                  <i class="fas fa-tachometer-alt fas fa-user"></i>
+                    <span>Login</span>
+                </a>
+                <a class="nav-link active" href="/perfil">
+                  <i class="fas fa-tachometer-alt fas fa-user"></i>
+                    <span>Perfil</span>
+                </a>
+                <a class="nav-link active" href="/cadastro"><i class="fa fa-gears"></i>
                   <span>Cadastre-se</span>
                   </a>
+                  
                   
                   <a class="nav-link active" href="/index.html">
                   <i class="fa fa-sign-out"></i>
