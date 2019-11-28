@@ -7,6 +7,7 @@ import Home from './home/Home';
 import Login from './login/Login';
 import Profile from './profile/profile';
 import FishRegister from './profile/fishRegister';
+import imageupload from './profile/imageupload';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -16,6 +17,7 @@ ReactDOM.render(
             <Route exact path="/login" component={Login} />
             <Route exact path="/perfil/" component={Profile} />
             <Route exact path="/perfil/cadastro/peixe" component={FishRegister} />
+            <Route exact path="/imageupload/" component={imageupload} />
         </Switch>
     </BrowserRouter>
     , document.getElementById('root'));
