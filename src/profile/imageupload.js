@@ -9,13 +9,25 @@ class imageupload extends Component{
         this.state = {
             image: null,
             url: '',
-            progress: 0
+            progress: 0,
+            userId: ""
         }
         this.handleChange = this
         .handleChange
         .bind(this);
         this.handleUpload = this.handleUpload.bind(this);
     }
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            this.setState({
+                userId: user.uid
+            })
+          }
+        });
+      }
+
     handleChange = e => {
         if  (e.target.files[0]){
             const image = e.target.files[0];
@@ -24,7 +36,7 @@ class imageupload extends Component{
     }
     handleUpload = () => {
         const {image} = this.state;
-        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        const uploadTask = storage.ref(`${this.state.userId}/${image.name}`).put(image);
         uploadTask.on('state_changed', 
         (snapshot) => {
         //Progress
@@ -37,8 +49,7 @@ class imageupload extends Component{
             console.log(error);
         },
         () => {
-        //Complete
-            storage.ref('images').child(image.name).getDownloadURL().then(url => {
+            storage.ref(this.state.userId).child(image.name).getDownloadURL().then(url => {
                console.log(url); 
                this.setState({url});
             })
