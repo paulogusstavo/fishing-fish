@@ -35,9 +35,16 @@ class Cadastro extends Component {
         signInSuccess: function(currentUser, credential, redirectUrl) {
           const userId = currentUser.uid; 
 
-          let dadosUser = DadosUsuario.getInstance();
-          dadosUser.setUserID(userId);
-          dadosUser.setUserName("Joao");
+          // DadosUsuario.setState({
+          //   isLogged: true,
+          //   userID: "1",
+          //   name: "2",
+          //   email: "3",
+          //   picture: "4"
+          // })
+
+          DadosUsuario.state = { userId: userId, accessToken: "fa7sd87a8sdf7as" } 
+          
           window.location.assign(`/perfil/${userId}`);
           
           return false;

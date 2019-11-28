@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
-import DadosUsuario from '../services/DadosUsuario';
 import firebase from 'firebase';
 
 class Navigation extends Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
-      isLogged: true,
-      nome: "Paulo",
+      isLogged: false,
+      nome: "",
     }
 
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({
+          isLogged: true,
+          nome: user.displayName.split(' ')[0]
+        })
+      }
+    });
   }
 
   render() {
