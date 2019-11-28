@@ -27,6 +27,7 @@ class Navigation extends Component {
   render() {
     return (
       <div>
+        
         <p>Ola, {this.state.nome}</p>
         <p>{this.state.isLogged ? "Sair" : "Entrar"}</p>
       </div>
