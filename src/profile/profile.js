@@ -9,11 +9,18 @@ class Profile extends Component {
       super(props);
     }
 
+    state = {
+    }
+
+    componentDidMount() {
+
+    }
+
       render() {
         return (
           <div>
             <Navigation></Navigation>
-            <MapContainer id={this.props.match.params.id}></MapContainer>
+            <MapContainer></MapContainer>
           </div>
       );
       }

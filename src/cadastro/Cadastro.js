@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from 'firebase';
 import Facebook from '../services/Facebook';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import DadosUsuario from '../services/DadosUsuario';
 import Profile from '../profile/profile';
 
 class Cadastro extends Component {
@@ -33,19 +32,9 @@ class Cadastro extends Component {
       ],
       callbacks: {
         signInSuccess: function(currentUser, credential, redirectUrl) {
-          const userId = currentUser.uid; 
+          // const userId = currentUser.uid; 
 
-          // DadosUsuario.setState({
-          //   isLogged: true,
-          //   userID: "1",
-          //   name: "2",
-          //   email: "3",
-          //   picture: "4"
-          // })
-
-          DadosUsuario.state = { userId: userId, accessToken: "fa7sd87a8sdf7as" } 
-          
-          window.location.assign(`/perfil/${userId}`);
+          window.location.assign(`/perfil/`);
           
           return false;
         },

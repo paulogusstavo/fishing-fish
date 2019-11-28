@@ -14,7 +14,7 @@ ReactDOM.render(
             <Route exact path="/" component={Home} />
             <Route exact path="/cadastro" component={Cadastro} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/perfil/:id" component={Profile} />
+            <Route exact path="/perfil/" component={Profile} />
             <Route exact path="/perfil/cadastro/peixe" component={FishRegister} />
         </Switch>
     </BrowserRouter>
