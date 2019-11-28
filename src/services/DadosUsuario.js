@@ -25,4 +25,12 @@ export default class DadosUsuario {
         this._userID = id;
     }
 
+    getUserName() {
+        return this._name;
+    }
+
+    setUserName(name) {
+        this._name = name;
+    }
+
 }

@@ -37,6 +37,7 @@ class Cadastro extends Component {
 
           let dadosUser = DadosUsuario.getInstance();
           dadosUser.setUserID(userId);
+          dadosUser.setUserName("Joao");
           window.location.assign(`/perfil/${userId}`);
           
           return false;
