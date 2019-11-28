@@ -14,19 +14,23 @@ export class GoogleMaps extends Component {
   }
 
   componentDidMount() {
-    firebase.database().ref(this.props.id).child("fishes")
-    .on("value", (snapshot)=>{
-      let points = []
-      snapshot.forEach( (fish) => {
-        points.push({
-          latitude: fish.val().latitude,
-          longitude: fish.val().longitude,
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        firebase.database().ref(user.uid).child("fishes")
+        .on("value", (snapshot)=>{
+          let points = []
+          snapshot.forEach( (fish) => {
+            points.push({
+              latitude: fish.val().latitude,
+              longitude: fish.val().longitude,
+            });
+          });
+          this.setState({
+            stores: points
+          })
+          console.log("Paulo->", this.state.stores)
         });
-      });
-      this.setState({
-        stores: points
-      })
-      console.log("Paulo->", this.state.stores)
+      }
     });
   }
 

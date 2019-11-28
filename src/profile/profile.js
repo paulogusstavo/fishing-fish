@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import MapContainer from '../services/maps';
 import firebase from 'firebase';
+import Navigation from './navigation';
 
 class Profile extends Component {
 
@@ -8,10 +9,18 @@ class Profile extends Component {
       super(props);
     }
 
+    state = {
+    }
+
+    componentDidMount() {
+
+    }
+
       render() {
         return (
           <div>
-            <MapContainer id={this.props.match.params.id}></MapContainer>
+            <Navigation></Navigation>
+            <MapContainer></MapContainer>
           </div>
       );
       }

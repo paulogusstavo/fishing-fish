@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 export default class DadosUsuario {
-    
+
     static myInstance = null;
     
     static getInstance() {
@@ -11,18 +11,26 @@ export default class DadosUsuario {
         return this.myInstance;
     }
     
-    _isLogged = false;
-    _userID = "";
-    _name = "";
-    _email = "";
-    _picture = "";
-
-    getUserID() {
-        return this._userID;
+    _state = {
+        _isLogged: false,
+        _userID: "",
+        _name: "",
+        _email: "",
+        _picture: ""
     }
 
-    setUserID(id) {
-        this._userID = id;
+    static getUserID() {
+        return DadosUsuario.getInstance()._state;
+    }
+
+    static setState(state) {
+        DadosUsuario.getInstance()._state = {
+            _isLogged: state.isLogged,
+            _userID: state.userID,
+            _name: state.name,
+            _email: state.email,
+            _picture: state.picture
+        }
     }
 
 }
