@@ -1,27 +1,28 @@
 import React, {Component} from 'react';
 
 export default class DadosUsuario {
-    static sharedInstance = DadosUsuario.sharedInstance == null ? new DadosUsuario() : this.sharedInstance
-
-    state = {
-        isLogged: false,
-        userID: "",
-        name: "",
-        email: "",
-        picture: ""
-    }
-
-    setData(props) {
-        this.state = {
-            isLogged: props.isLogged,
-            userID: props.userID,
-            name: props.name,
-            email: props.name,
-            picture: props.picture
+    
+    static myInstance = null;
+    
+    static getInstance() {
+        if (DadosUsuario.myInstance == null) {
+            DadosUsuario.myInstance = new DadosUsuario();
         }
+        return this.myInstance;
+    }
+    
+    _isLogged = false;
+    _userID = "";
+    _name = "";
+    _email = "";
+    _picture = "";
+
+    getUserID() {
+        return this._userID;
     }
 
-    getData(){
-        return this.state;
+    setUserID(id) {
+        this._userID = id;
     }
+
 }

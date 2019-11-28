@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {Route, BrowserRouter, Switch} from 'react-router-dom';
+import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import './cadastro.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from 'firebase';
 import Facebook from '../services/Facebook';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import DadosUsuario from '../services/DadosUsuario';
+import Profile from '../profile/profile';
 
 class Cadastro extends Component {
   
@@ -30,13 +32,17 @@ class Cadastro extends Component {
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
       callbacks: {
-        signInSucess: () => false,
-        signInSucessWithAuthResult: async function(authResult, redirectUrl) {
-          console.log("PPP-> ",authResult, redirectUrl);
-          let token = await firebase.auth().currentUser.getIdToken(true);
-          console.log(token);
+        signInSuccess: function(currentUser, credential, redirectUrl) {
+          const userId = currentUser.uid; 
 
-          return true;
+          let dadosUser = DadosUsuario.getInstance();
+          dadosUser.setUserID(userId);
+          window.location.assign(`/perfil/${userId}`);
+          
+          return false;
+        },
+        signInSucessWithAuthResult: function(currentUser, credential, redirectUrl) {
+          return false;
         }
       }
     }
@@ -44,7 +50,7 @@ class Cadastro extends Component {
     this.componentDidMount = () => {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-          //alert("Mudou");
+
           firebase.database().ref('usuario').child(user.uid).set({
             nome: this.state.nome,
             sobrenome: this.state.sobrenome

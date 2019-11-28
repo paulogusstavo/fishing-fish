@@ -3,16 +3,18 @@ import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import firebase from 'firebase';
 
 export class GoogleMaps extends Component {
+  
   constructor(props) {
     super(props);
 
     this.state = {
       stores: []
     }
+
   }
 
   componentDidMount() {
-    firebase.database().ref("zWdbhx2MfrcBzRj56BLAej5L43l2").child("fishes")
+    firebase.database().ref(this.props.id).child("fishes")
     .on("value", (snapshot)=>{
       let points = []
       snapshot.forEach( (fish) => {
@@ -28,21 +30,13 @@ export class GoogleMaps extends Component {
     });
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("1");
-    console.log(nextProps, nextState);
-    console.log(this.props, this.state);
-
-    return true;
-  }
-
   marcadoresLocais = () => {
     return this.state.stores.map((store, index) => {
       return <Marker key={index} id={index} position={{
        lat: store.latitude,
        lng: store.longitude
      }}
-     onClick={() => console.log("You clicked me!")} />
+     onClick={() => console.log("Clicou no marcador")} />
     })
   }
 
