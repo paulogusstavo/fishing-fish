@@ -39,6 +39,10 @@ function Home() {
                   <i class="fas fa-tachometer-alt fas fa-user"></i>
                     <span>Upload de Fotos</span>
                 </a>
+                <a class="nav-link active" href="/portfolio">
+                  <i class="fas fa-tachometer-alt fas fa-user"></i>
+                    <span>Portifolio</span>
+                </a>
                 <a class="nav-link active" href="/cadastro"><i class="fa fa-gears"></i>
                   <span>Cadastre-se</span>
                   </a>
