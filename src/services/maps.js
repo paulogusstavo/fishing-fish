@@ -59,8 +59,8 @@ export class GoogleMaps extends Component {
 }
 
 const mapStyles = {
-  width: '95%',
-  height: '95%',
+  width: '100%',
+  height: '93%',
 };
 
 export default GoogleApiWrapper({
